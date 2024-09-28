@@ -11,18 +11,18 @@ QUESTIONS = {
   "q5" => "Can you code in C#?"
 }.freeze
 
-# TODO: FULLY IMPLEMENT
-def do_prompt
-  # Ask each question and get an answer from the user's input.
-  QUESTIONS.each_key do |question_key|
-    print QUESTIONS[question_key]
-    ans = gets.chomp
+class RatingsGenerator
+  # TODO: FULLY IMPLEMENT
+  def do_prompt
+    # Ask each question and get an answer from the user's input.
+    QUESTIONS.each_key do |question_key|
+      print QUESTIONS[question_key]
+      ans = gets.chomp
+    end
+  end
+
+  def do_report
+    # TODO: IMPLEMENT
   end
 end
 
-def do_report
-  # TODO: IMPLEMENT
-end
-
-do_prompt
-do_report
