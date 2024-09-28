@@ -1,22 +1,18 @@
 require "pstore" # https://github.com/ruby/pstore
+require "pry"
+require "./constants"
 
-STORE_NAME = "tendable.pstore"
 store = PStore.new(STORE_NAME)
-
-QUESTIONS = {
-  "q1" => "Can you code in Ruby?",
-  "q2" => "Can you code in JavaScript?",
-  "q3" => "Can you code in Swift?",
-  "q4" => "Can you code in Java?",
-  "q5" => "Can you code in C#?"
-}.freeze
 
 class RatingsGenerator
   # TODO: FULLY IMPLEMENT
   def do_prompt
     # Ask each question and get an answer from the user's input.
+    p 'Whats your goodname?: '
+    developer_name = gets.chomp
+
     QUESTIONS.each_key do |question_key|
-      print QUESTIONS[question_key]
+      print "#{QUESTIONS[question_key]}\n"
       ans = gets.chomp
     end
   end
@@ -25,4 +21,6 @@ class RatingsGenerator
     # TODO: IMPLEMENT
   end
 end
+
+RatingsGenerator.new().do_prompt
 
