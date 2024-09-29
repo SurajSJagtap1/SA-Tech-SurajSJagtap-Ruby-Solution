@@ -1,37 +1,18 @@
 # Tendable Coding Assessment
+## Usecase
+  The application asks you the questions related to your skillset in various programming languages and calculates the ratings based on your answers.
 
-## Usage
+## Setup Requirements
+1) You should have ruby-2.7.2 installed on your system.
+2) Clone this repository to your local.
+3) Check inside the repository (`cd SA-Tech-SurajSJagtap-Ruby-Solution`) and run `bundle` (to isntall required gems)
+3) then run `ruby ratings_generator.rb` to run the application.
+4) Answer the questions appropriately and you will get the ratings calculated for the current run as well as your overall average ratings.
 
-```sh
-bundle
-ruby questionnaire.rb
-```
-
-## Goal
-
-The goal is to implement a survey where a user should be able to answer a series of Yes/No questions. After each run, a rating is calculated to let them know how they did. Another rating is also calculated to provide an overall score for all runs.
-
-## Requirements
-
-Possible question answers are: "Yes", "No", "Y", or "N" case insensitively to answer each question prompt.
-
-The answers will need to be **persisted** so they can be used in calculations for subsequent runs >> it is proposed you use the pstore for this, already included in the Gemfile
-
-After _each_ run the program should calculate and print a rating. The calculation for the rating is: `100 * number of yes answers / number of questions`.
-
-The program should also print an average rating for all runs.
-
-The questions can be found in questionnaire.rb
-
-Ensure we can run your exercise
-
-## Bonus Points
-
-Updated readme with an explanation of your approach
-
-Unit Tests
-
-Code Comments
-
-Dockerfile / Bash script if needed for us to run the exercise
+## My Approach of implementation.
+* I have used class-based code design to solve this problem, where I have modularised my code across multiple small methods for ensuring Single Responsibility to each of the method. This makes it easy to debug, maintain and extend the code.
+* I have written separate methods for asking questions, calculating ratings (both current and overall), storing the answers into pstore.
+* I have added validation on answers, so user answers the questions in a particular options [Yes, No, y, n] (Case Insensitive)
+* If user answers the question incorrectly, he is prompted with allowed answers and that question continues until user answers it appropriately.
+* constants are kept in a separate file to maintain the cleanliness of the code.
 
