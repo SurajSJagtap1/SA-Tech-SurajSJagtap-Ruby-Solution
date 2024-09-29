@@ -3,11 +3,13 @@ require "pry"
 require "./constants"
 
 class RatingsGenerator
-  @@store = PStore.new(STORE_NAME)
+  @@store = PStore.new(STORE_NAME) # CLASS VARIABLE. Will be executed at the time of class loading, and is accessible across all methods of this class.
+
   def do_prompt
     answers_for_current_run = collect_answers
     store_answers(answers_for_current_run)
     puts "Your Rating for current survey is: #{calculate_rating_for_current_run(answers_for_current_run)}\n"
+    puts "Your Over All Rating is: #{do_report}"
   end
 
   private
@@ -44,7 +46,9 @@ class RatingsGenerator
   end
 
   def do_report
-    # TODO: IMPLEMENT
+    all_answers = @@store.transaction { @@store['all_answers'] }.flatten
+    yes_count = all_answers.select{|answer|  answer == 'yes' || answer == 'y'}.count
+    ( 100 * yes_count / all_answers.count )
   end
 end
 
