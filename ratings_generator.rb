@@ -2,16 +2,23 @@ require "pstore" # https://github.com/ruby/pstore
 require "pry"
 require "./constants"
 
-store = PStore.new(STORE_NAME)
-
 class RatingsGenerator
+  @@store = PStore.new(STORE_NAME)
   def do_prompt
-    answers = collect_answers
-    rating_for_current_run = calculate_rating_for_current_run(answers)
-    puts "Your Rating for this survey is: #{rating_for_current_run}\n"
+    answers_for_current_run = collect_answers
+    store_answers(answers_for_current_run)
+    puts "Your Rating for current survey is: #{calculate_rating_for_current_run(answers_for_current_run)}\n"
   end
 
   private
+
+  def store_answers(answers_for_current_run)   # persists answers for all the runs
+    if @@store.transaction { @@store['all_answers'] }.nil?
+      @@store.transaction { @@store['all_answers'] = [answers_for_current_run] }
+    else
+      @@store.transaction { @@store['all_answers'].push(answers_for_current_run) }
+    end
+  end
 
   def collect_answers # Asks questions and collects user's answers for the survey
     answers = []
