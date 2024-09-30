@@ -9,7 +9,13 @@ class RatingsGenerator
     answers_for_current_run = collect_answers
     store_answers(answers_for_current_run)
     puts "Your Rating for current survey is: #{calculate_rating_for_current_run(answers_for_current_run)}\n"
-    puts "Your Over All Rating is: #{do_report}"
+    do_report
+  end
+
+  def do_report
+    all_answers = @@store.transaction { @@store['all_answers'] }.flatten
+    yes_count = all_answers.select{|answer|  answer == 'yes' || answer == 'y'}.count
+    puts "Your Over All Average Rating is: #{( 100 * yes_count / all_answers.count )}"
   end
 
   private
@@ -45,12 +51,9 @@ class RatingsGenerator
     ( 100 * yes_count / QUESTIONS.keys.count )
   end
 
-  def do_report
-    all_answers = @@store.transaction { @@store['all_answers'] }.flatten
-    yes_count = all_answers.select{|answer|  answer == 'yes' || answer == 'y'}.count
-    ( 100 * yes_count / all_answers.count )
-  end
 end
 
-RatingsGenerator.new().do_prompt
+RatingsGenerator.new.do_prompt  # This will ask questions and print rating for current run as well as overall average rating
+
+# RatingsGenerator.new.do_report  # This will calculate and print overall average rating
 
