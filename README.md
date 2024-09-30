@@ -8,6 +8,8 @@
 3) Check inside the repository (`cd SA-Tech-SurajSJagtap-Ruby-Solution`) and run `bundle` (to isntall required gems)
 3) then run `ruby ratings_generator.rb` to run the application.
 4) Answer the questions appropriately and you will get the ratings calculated for the current run as well as your overall average ratings.
+5) To run the survey, one should call `RatingsGenerator.new.do_prompt`, This will ask questions and print rating for current run as well as overall average rating.
+6) To generate overall report for all answers collected so far, one should call `RatingsGenerator.new.do_report`, This will calculate and print overall average rating.
 
 ## My Approach of implementation.
 * I have used class-based code design to solve this problem, where I have modularised my code across multiple small methods for ensuring Single Responsibility to each of the method. This makes it easy to debug, maintain and extend the code.
